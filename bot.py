@@ -78,7 +78,7 @@ async def answer(bot, query: InlineQuery):
             InlineQueryResultArticle(
                 title="Help & Usage",
                 input_message_content=InputTextMessageContent(Config.HELP_TEXT, disable_web_page_preview=True,
-                                                              parse_mode="Markdown"),
+                                                              parse_mode=ParseMode.MARKDOWN),
                 description="Documention of How to Use this Bot.",
                 thumb_url="https://i.imgur.com/6jZsMYG.png",
                 reply_markup=InlineKeyboardMarkup(
@@ -184,14 +184,14 @@ async def answer(bot, query: InlineQuery):
                             )
                             await bot.send_message(chat_id=Config.LOG_CHANNEL,
                                                    text=f"#STREAMTAPE_DELETE:\n\n[{query.from_user.first_name}](tg://user?id={query.from_user.id}) Deleted Streamtape File !!\n\n**File Name:** {splited}\n\n**File Token:** `{token}`",
-                                                   parse_mode="Markdown", disable_web_page_preview=True)
+                                                   parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
                         else:
                             answers.append(
                                 InlineQueryResultArticle(title="File Not Deleted!",
                                                          description=f"Can't Delete [{token}]",
                                                          input_message_content=InputTextMessageContent(
                                                              message_text=f"Can't Delete - {splited}\nUsing [{token}]",
-                                                             disable_web_page_preview=True, parse_mode="Markdown"))
+                                                             disable_web_page_preview=True, parse_mode=ParseMode.MARKDOWN))
                             )
             except Exception as err:
                 answers.append(
@@ -276,14 +276,14 @@ async def answer(bot, query: InlineQuery):
                         )
                         await bot.send_message(chat_id=Config.LOG_CHANNEL,
                                                text=f"#GOFILE_DELETE:\n\n[{query.from_user.first_name}](tg://user?id={query.from_user.id}) Deleted GoFile.io File !!\n\n**File Name:** {splited}\n\n**AdminCode:** `{adminCode}`\n\n**File Token:** `{token}`",
-                                               parse_mode="Markdown", disable_web_page_preview=True)
+                                               parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
                     else:
                         answers.append(
                             InlineQueryResultArticle(title="File Not Deleted!",
                                                      description=f"Can't Delete [{token}], Using [{adminCode}]",
                                                      input_message_content=InputTextMessageContent(
                                                          message_text=f"Can't Delete - {splited}\nUsing [{adminCode}]",
-                                                         disable_web_page_preview=True, parse_mode="Markdown"))
+                                                         disable_web_page_preview=True, parse_mode=ParseMode.MARKDOWN))
                         )
 
         except Exception as err:
@@ -464,14 +464,14 @@ async def answer(bot, query: InlineQuery):
                         )
                         await bot.send_message(chat_id=Config.LOG_CHANNEL,
                                                text=f"#REMOTE_URL_REMOVE:\n\n[{query.from_user.first_name}](tg://user?id={query.from_user.id}) Removed Remote URL from Streamtape Account !!\n\n**Remote Token:** `{token}`",
-                                               parse_mode="Markdown", disable_web_page_preview=True)
+                                               parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
                     else:
                         answers.append(
                             InlineQueryResultArticle(title="Can't Remove Remote URL!",
                                                      description=f"Some Issues with Remote Token!",
                                                      input_message_content=InputTextMessageContent(
                                                          message_text=f"Can't Remove Remote URL!\n\nRemote Token: {token}\nHaving Some Issues.",
-                                                         parse_mode="Markdown", disable_web_page_preview=True))
+                                                         parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True))
                         )
             except Exception as e:
                 answers.append(
@@ -629,7 +629,7 @@ async def answer(bot, query: InlineQuery):
                         answers.append(
                             InlineQueryResultArticle(title="Nothing Found!", description="Nothing ...",
                                                      input_message_content=InputTextMessageContent(
-                                                         message_text="Nothing Found ...", parse_mode="Markdown",
+                                                         message_text="Nothing Found ...", parse_mode=ParseMode.MARKDOWN,
                                                          disable_web_page_preview=True))
                         )
             except Exception as e:
@@ -659,7 +659,7 @@ async def button(bot, data: CallbackQuery):
     cb_data = data.data
     if "uptogofile" in cb_data:
         downloadit = data.message.reply_to_message
-        a = await data.message.edit("Downloading to my Server ...", parse_mode="Markdown",
+        a = await data.message.edit("Downloading to my Server ...", parse_mode=ParseMode.MARKDOWN,
                                     disable_web_page_preview=True)
         dl_loc = Config.DOWNLOAD_DIR + "/" + str(data.from_user.id) + "/"
         if not os.path.isdir(dl_loc):
@@ -703,13 +703,13 @@ async def button(bot, data: CallbackQuery):
                 forwarded_msg = await data.message.reply_to_message.forward(Config.LOG_CHANNEL)
                 await bot.send_message(chat_id=Config.LOG_CHANNEL,
                                        text=f"#GOFILE_UPLOAD:\n\n[{data.from_user.first_name}](tg://user?id={data.from_user.id}) Uploaded to GoFile.io !!\n\n**URL:** https://gofile.io/d/{token}",
-                                       reply_to_message_id=forwarded_msg.message_id, parse_mode="Markdown",
+                                       reply_to_message_id=forwarded_msg.message_id, parse_mode=ParseMode.MARKDOWN,
                                        disable_web_page_preview=True)
         except Exception as err:
             await a.edit(f"Something went wrong!\n\n**Error:** `{err}`")
     elif "uptostreamtape" in cb_data:
         downloadit = data.message.reply_to_message
-        a = await data.message.edit("Downloading to my Server ...", parse_mode="Markdown",
+        a = await data.message.edit("Downloading to my Server ...", parse_mode=ParseMode.MARKDOWN,
                                     disable_web_page_preview=True)
         dl_loc = Config.DOWNLOAD_DIR + "/" + str(data.from_user.id) + "/"
         if not os.path.isdir(dl_loc):
@@ -744,7 +744,7 @@ async def button(bot, data: CallbackQuery):
 
             if not int(status) == 200:
                 await data.message.reply_to_message.reply_text(
-                    "Something Went Wrong!\n\n**Error:** Server Didn't Accept My Request!", parse_mode="Markdown",
+                    "Something Went Wrong!\n\n**Error:** Server Didn't Accept My Request!", parse_mode=ParseMode.MARKDOWN,
                     disable_web_page_preview=True)
                 return
             else:
@@ -762,7 +762,7 @@ async def button(bot, data: CallbackQuery):
                 forwarded_msg = await data.message.reply_to_message.forward(Config.LOG_CHANNEL)
                 await bot.send_message(chat_id=Config.LOG_CHANNEL,
                                        text=f"#STREAMTAPE_UPLOAD:\n\n[{data.from_user.first_name}](tg://user?id={data.from_user.id}) Uploaded to Streamtape !!\n\n**URL:** {download_link}",
-                                       reply_to_message_id=forwarded_msg.message_id, parse_mode="Markdown",
+                                       reply_to_message_id=forwarded_msg.message_id, parse_mode=ParseMode.MARKDOWN,
                                        disable_web_page_preview=True)
 
     elif "deletestream" in cb_data:
