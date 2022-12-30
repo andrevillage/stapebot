@@ -9,7 +9,7 @@ from pyrogram import Client, filters, errors
 from core.display_progress import progress_for_pyrogram, humanbytes
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InlineQueryResultArticle, \
     InputTextMessageContent, InlineQuery
-import ParseMode
+from pyrogram.enums.parse_mode import ParseMode
 Bot = Client(Config.SESSION_NAME, bot_token=Config.BOT_TOKEN, api_id=Config.API_ID, api_hash=Config.API_HASH)
 
 
