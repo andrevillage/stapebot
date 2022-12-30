@@ -1,5 +1,6 @@
 # Cloud-UPManager-Bot
 This is Telegram Cloud Uploads Manager Bot by [@AbirHasan2005](https://github.com/AbirHasan2005)
+# 4 Gb Support Added
 
 ## Features:
 - Upload Telegram Media to [GoFile.io](https://gofile.io/)
