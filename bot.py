@@ -23,7 +23,7 @@ from pyrogram.types import Message
 from config import OWNER_ID
 
 
-@Bot.on_message(filters.command("speedtest") & filters.user(OWNER_ID))
+@Bot.on_message(filters.command("speedtest"))
 async def run_speedtest(_, cmd):
     hiztesti = await cmd.reply_text("`⚡️ Hız Testi Yapılıyor`")
     try:
