@@ -12,6 +12,51 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQ
 from pyrogram.enums.parse_mode import ParseMode
 Bot = Client(Config.SESSION_NAME, bot_token=Config.BOT_TOKEN, api_id=Config.API_ID, api_hash=Config.API_HASH)
 
+#:d
+
+import os
+
+import speedtest
+from pyrogram import Client, filters
+from pyrogram.types import Message
+
+from config import OWNER_ID
+
+
+@Bot.on_message(filters.command("speedtest") & filters.user(OWNER_ID))
+async def run_speedtest(_, cmd):
+    hiztesti = await cmd.reply_text("`⚡️ Hız Testi Yapılıyor`")
+    try:
+        hiztest = speedtest.Speedtest()
+        hiztest.get_best_server()
+        hiztesti = await hiztesti.edit("`⚡️ İndirme hızı ölçülüyor... `")
+        hiztest.download()
+        hiztesti = await hiztesti.edit("`⚡️ Yükleme hızı ölçülüyor...`")
+        hiztest.upload()
+        hiztest.results.share()
+        result = hiztest.results.dict()
+    except Exception as e:
+        await hiztesti.edit(e)
+        return
+    hiztesti = await hiztesti.edit("`🔄 Sonuçlar Getiriliyor...`")
+    hiztestifoto = hiztest.results.share()
+
+    sonuccaption = f"""💡 <b>Hız Testi Sonucu</b>
+    
+<u><b>Şirket:<b></u>
+<b>ISP:</b> {result['client']['isp']}
+<b>Ülke:</b> {result['client']['country']}
+  
+<u><b>Sunucu:</b></u>
+<b>İsim:</b> {result['server']['name']}
+<b>Ülke:</b> {result['server']['country']}, {result['server']['cc']}
+<b>Sponsor:</b> {result['server']['sponsor']}
+⚡️ <b>Ping:</b> {result['ping']}"""
+    msg = await cmd.send_photo(
+        chat_id=m.chat.id, photo=hiztestifoto, caption=sonuccaption
+    )
+    os.remove(hiztestifoto)
+    await hiztesti.delete()
 
 @Bot.on_message(filters.command("start"))
 async def start_handler(_, cmd):
