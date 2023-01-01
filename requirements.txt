@@ -2,4 +2,4 @@ Pyrogram
 TgCrypto
 aiohttp
 requests
-speedtest
+speedtest-cli
