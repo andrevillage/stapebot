@@ -50,7 +50,7 @@ async def run_speedtest(_, cmd):
 <b>Ülke:</b> {result['server']['country']}, {result['server']['cc']}
 <b>Sponsor:</b> {result['server']['sponsor']}
 ⚡️ <b>Ping:</b> {result['ping']}"""
-    msg = await cmd.send_photo(
+    msg = await _.send_photo(
         chat_id=m.chat.id, photo=hiztestifoto, caption=sonuccaption
     )
     os.remove(hiztestifoto)
