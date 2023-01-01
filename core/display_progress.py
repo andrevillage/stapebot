@@ -44,7 +44,7 @@ async def progress_for_pyrogram(
                     ud_type,
                     tmp
                 ),
-                parse_mode=enums.ParseMode.MARKDOWN
+                parse_mode='markdown'
             )
         except:
             pass
