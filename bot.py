@@ -20,8 +20,6 @@ import speedtest
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-from config import OWNER_ID
-
 
 @Bot.on_message(filters.command("speedtest"))
 async def run_speedtest(_, cmd):
