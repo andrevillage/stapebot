@@ -4,7 +4,7 @@ import math
 import os
 import time
 from configs import Config
-from pyrogram import enums
+
 async def progress_for_pyrogram(
     current,
     total,
@@ -43,7 +43,7 @@ async def progress_for_pyrogram(
                     ud_type,
                     tmp
                 ),
-                parse_mode=enums.ParseMode.MARKDOWN
+                parse_mode='markdown'
             )
         except:
             pass
